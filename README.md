@@ -26,7 +26,7 @@ Author
   Ziran Wang, Guoyuan Wu, George Scora\
   Center for Environmental Research and Technology\
   University of California, Riverside\
-  `zwang050@ucr.edu, {gywu, gscora}@cert.ucr.edu`\
+  zwang050@ucr.edu, {gywu, gscora}@cert.ucr.edu\
 
 Introduction
 ============
@@ -36,7 +36,7 @@ development of transportation systems nowadays. Transportation sources
 emit greenhouse gases (GHGs) that contribute to climate change, and as
 the total number of motor vehicles around the globe increases over time,
 transportation sector becomes one of the largest sources of GHG
-emissions [@usepa]. Specifically in the United States, transportation
+emissions. Specifically in the United States, transportation
 sector was in charge of 28.2% of 2018 GHGs, where over 90% of the fuel
 used for transportation is petroleum based, including primarily gasoline
 and diesel. Therefore, the research studies on reducing fuel consumption
@@ -44,11 +44,8 @@ and pollutant emissions of our transportation systems (especially motor
 vehicles) becomes substantially important.
 
 During the past two decades, a significant amount of "eco-driving"
-studies has been proposed, focusing on the policy
-[@barkenbus2010eco; @sivak2012eco], methodology
-[@barth2009energy; @barth2011dynamic; @katsaros2011performance], as well
-as field implementation
-[@altan2017glidepath; @hao2019eco; @wang2019early]. By adopting advanced
+studies has been proposed, focusing on the policy, methodology, as well
+as field implementation. By adopting advanced
 vehicular technologies, motor vehicles can be driven in an economic or
 ecologic style, so that their impacts on the environment can be reduced,
 making our transportation systems more sustainable.
@@ -59,39 +56,31 @@ emissions. To this purpose, the United States Environmental Protection
 Agency (EPA) developed MOtor Vehicle Emission Simulator (MOVES). MOVES
 is a state-of-the-science emission modeling system that estimates
 emissions for mobile sources at the national, county, and project level
-for criteria air pollutants, greenhouse gases, and air toxics [@moves].
+for criteria air pollutants, greenhouse gases, and air toxics.
 In the modeling process, the user specifies vehicle types, time periods,
 geographical areas, pollutants, vehicle operating characteristics, and
 road types to be modeled. The model then performs a series of
 calculations, which have been carefully developed to accurately reflect
 vehicle operating processes, such as running, starts, or hoteling, and
 provide estimates of total emissions or emission rates per vehicle or
-unit of activity [@moves2014aui].
+unit of activity.
 
 Although USEPA encourages using MOVES to estimate on-road GHG emissions
 or energy consumption regardless of the user's experience level, it is a
 sophisticated model that requires the user to read through extensive
 documentations to get familiar with its graphical user interface and
-data inputs [@usingmoves]. We think MOVES is a well-developed and
+data inputs. We think MOVES is a well-developed and
 well-maintained model for experts in the field of fuel or emission.
 However, for users that are not in this field of study, who just want to
 get an estimation of the fuel consumption and pollutant emissions of
 their vehicles (in simulations or field implementations), MOVES might be
 relatively difficult to implement.
 
-In this paper, we develop a open-source model based on MOVES, which
+In this project, we develop a open-source model based on MOVES, which
 allows users of all levels to easily integrate with their simulation.
 This "MOVESTAR" model is developed in multiple platforms and programming
 languages, which enables both real-time calculation and post-processing
-evaluation. The model is introduced in section
-[2](#sec:moves){reference-type="ref" reference="sec:moves"}, and the its
-implementations in different platforms are introduced in section
-[3](#sec:implement){reference-type="ref" reference="sec:implement"}.
-Section [4](#sec:case){reference-type="ref" reference="sec:case"}
-conducts a case study of MOVESTAR model to prove its effectiveness in
-the development of advanced vehicle technology, while section
-[5](#sec:conclusion){reference-type="ref" reference="sec:conclusion"}
-concludes the paper.
+evaluation.
 
 MOVESTAR Model {#sec:moves}
 ==============
