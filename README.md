@@ -85,11 +85,10 @@ evaluation.
 MOVESTAR Model
 ==============
 
-<img src="docs/images/Flowchart.PNG" align="middle" width="100"/>
+<img src="docs/images/Flowchart.PNG" align="middle" width="500"/>
 
 In this section, MOVESTAR model is introduced step by step, which is
-summarized by the flowchart shown in figure
-[1](#flow){reference-type="ref" reference="flow"}. The very first step
+summarized by the flowchart shown in figure above. The very first step
 is to define the vehicle type of the target vehicle that needs to be
 considered. Originally, the user of MOVES has to select from 13 "source
 use types", which is the terminology defind by MOVES to describe
@@ -98,9 +97,7 @@ fuel types, including gasoline, diesel, ethanol E-85, compressed natural
 gas (CNG), electricity, and liquefied petroleum gas. Both steps are
 supposed to be conducted in the GUI of MOVES. However, in order to
 simplify this first process of MOVESTAR, we only provide limited options
-of vehicle types, which will be discussed in the implementation details
-in section [3](#sec:implement){reference-type="ref"
-reference="sec:implement"}.
+of vehicle types.
 
 Actually, before this vehicle type selection, MOVES originally has four
 additional steps in its GUI, including specifying "description", "scale"
@@ -112,13 +109,11 @@ steps are all removed in our proposed MOVESTAR model.
 
 Once the vehicle type is selected, the related parameters of each
 vehicle type can be loaded for further calculation of the vehicle
-specific power (VSP). The variables $A, B, C, M$ and $f$ needed in the
-VSP calculation are derived from the following table
-[\[table\]](#table){reference-type="ref" reference="table"} based on
+specific power (VSP). The variables A, B, C, M and f needed in the
+VSP calculation are derived from the following table based on
 different vehicle types.
 
-![image](Table.png){width="1.0\\columnwidth"} [\[table\]]{#table
-label="table"}
+<img src="docs/images/Table.png" align="middle" width="700"/>
 
 In order to calculate the VSP, we need to also obtain the vehicle state.
 VSP is calculated by normalizing the continuous power output for each
@@ -126,7 +121,7 @@ vehicle to its own weight. Vehicles are tested on full chassis
 dynamometers, and emission standards are in units of grams per mile.
 Therefore, the emission standards are largely independent of the weight
 (as well as other physical characteristics) of the vehicle and depend on
-the distance [@exhaust2017].
+the distance.
 
 As mentioned earlier, the proposed MOVESTAR model only requires
 second-by-second vehicle speed data as model input, so the user needs to
@@ -134,27 +129,14 @@ pre-process the data if its frequency is not 1Hz. Additionally, MOVESTAR
 model has an additional function that can convert the second-by-second
 speed data into the second-by-second acceleration data.
 
-Then, the VSP can be calculated as below
-
-$$\label{vsp}
-    VSP = \frac {A \cdot v + B \cdot v^2 + C \cdot v^3 + M \cdot (a + g \cdot \sin{\theta}) \cdot v}{f}$$\
-where $A$ is the rolling term; $B$ is the rotating term; $C$ is the drag
-term; $M$ is the source mass (in metric tons); $f$ is the fixed mass
-factor (in metric tons); $g$ is the acceleration due to gravity (9.8
-$m/s^2$); $v$ is the vehicle speed in $m/s$; $a$ is the vehicle
-acceleration in $m/s^2$; and $\theta$ is the (fractional) road grade.
-
 Once the VSP is calculated, MOVESTAR model will be proceeded to the
 operating mode calculation. Operating mode is directly used to calculate
 fuel consumption and pollutant emissions in MOVESTAR model. It is
 calculated on a second-by-second basis, based on the VSP and speed class
 of the vehicle. The mapping relationship from VSP and speed class to the
-operating mode is illustrated as table
-[\[opmode\]](#opmode){reference-type="ref" reference="opmode"}
-[@moves2011workshop].
+operating mode is illustrated as the following table.
 
-![image](OpMode.png){width="0.5\\columnwidth"} [\[opmode\]]{#opmode
-label="opmode"}
+<img src="docs/images/OpMode.png" align="middle" width="500"/>
 
 As can be seen from the table, the values in the center of the table
 stand for the operating modes of a vehicle, which are mapped from VSP
@@ -172,11 +154,10 @@ operating modes is defined in USEPA MOVES, where we only extract the
 values of specific vehicle types as defined earlier. Therefore, based on
 the second-by-second operating modes of a vehicle, second-by-second fuel
 and emission outputs of our MOVESTAR model can be generated. A list of
-all outputs are shown as table
-[\[result\]](#result){reference-type="ref" reference="result"}.
+all outputs are shown as the following table.
 
-![image](Output.PNG){width="1.0\\columnwidth"} [\[result\]]{#result
-label="result"}
+<img src="docs/images/Output.PNG" align="middle" width="500"/>
+
 
 Open-Source Implementation in Various Platforms {#sec:implement}
 ===============================================
