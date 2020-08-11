@@ -85,7 +85,7 @@ evaluation.
 MOVESTAR Model
 ==============
 
-<img src="docs/images/Flowchart.PNG" align="middle" width="3000"/>
+<img src="docs/images/Flowchart.PNG" align="middle" width="1000"/>
 
 In this section, MOVESTAR model is introduced step by step, which is
 summarized by the flowchart shown in figure
