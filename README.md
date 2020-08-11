@@ -156,4 +156,4 @@ the second-by-second operating modes of a vehicle, second-by-second fuel
 and emission outputs of our MOVESTAR model can be generated. A list of
 all outputs are shown as the following table.
 
-<img src="docs/images/Output.PNG" align="middle" width="500"/>
+<img src="docs/images/Output.PNG" align="middle" width="700"/>
