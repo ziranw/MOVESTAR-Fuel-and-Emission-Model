@@ -85,8 +85,7 @@ evaluation.
 MOVESTAR Model
 ==============
 
-![Flowchart of the proposed MOVESTAR model as a simplified version of
-USEPA MOVES](figure//Flowchart.PNG){#flow width="0.6\\columnwidth"}
+<img src="docs/images/Flowchart.PNG" align="middle" width="3000"/>
 
 In this section, MOVESTAR model is introduced step by step, which is
 summarized by the flowchart shown in figure
