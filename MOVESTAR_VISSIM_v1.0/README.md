@@ -9,16 +9,16 @@ Authors
   University of California, Riverside\
   zwang050@ucr.edu, gywu@cert.ucr.edu, gscora@cert.ucr.edu
 
-Open-Source Implementation in Various Platforms {#sec:implement}
+Open-Source Implementation in Various Platforms
 ===============================================
 
 Microscopic Traffic Simulator Vissim with C++ API
 -------------------------------------------------
 
-As a widely used microscopic traffic simulator, PTV Vissim [@VISSIM]
+As a widely used microscopic traffic simulator, PTV Vissim
 provides C++ API for users to load external emission models. MOVESTAR
 model also provides a C++ project that can be integrated in Vissim to
-calculate fuel and emission in real simulation time[^2].
+calculate fuel and emission in real simulation time.
 
 This C++ project includes an "EmissionModel.cpp" file and an
 "EmissionModel.h" file. The ".cpp" file is the main script that includes
@@ -31,8 +31,6 @@ detailed integration steps should be referred to the Vissim manual.
 
 <img src="VISSIM.png" align="middle" width="1000"/>
 
-![Integration framework of MOVESTAR model in PTV
-Vissim](VISSIM.png){#transform width="1.0\\columnwidth"}
 
 Case Study and Results Evaluation {#sec:case}
 =================================
@@ -50,15 +48,16 @@ be illustrated as the following figure.
 
 A microscopic traffic simulation network based on the real-world map in
 Riverside, CA, USA is modeled in Vissim as figure
-[4](#network){reference-type="ref" reference="network"}, with real-world
-signal phase and timing data and traffic count data. Different vehicle
-longitudinal control models and their relevant logic (e.g., role
+below, with real-world
+signal phase and timing data and traffic count data. 
+
+<img src="Fig5.PNG" align="middle" width="700"/>
+
+Different vehicle longitudinal control models and their relevant logic (e.g., role
 transition) are integrated into the simulation network to simulate
 vehicles' behavior. MOVESTAR fuel and emission model is implemented to
 analyze the environmental impacts of the proposed CED system. This
 integration architecture is illustrated in the following figure.
-
-<img src="Fig5.PNG" align="middle" width="700"/>
 
 <img src="VISSIM2.png" align="middle" width="700"/>
 
@@ -72,7 +71,7 @@ not cooperate with other CAVs.
 
 As can be seen from the following table,
 the results of energy consumption, NOx emission, HC emission, CO
-emission, and CO$_2$ emission can all be calculated by MOVESTAR model in
+emission, and CO2 emission can all be calculated by MOVESTAR model in
 different scenarios, which are eventually shown as relative values with
 respect to two baseline scenarios. This case study validates the
 effectiveness of the CED system, because the fuel and emission results
