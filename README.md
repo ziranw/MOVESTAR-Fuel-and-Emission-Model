@@ -1,5 +1,9 @@
----
-abstract: |
+MOVESTAR: An Open-Source Vehicle Fuel and Emission Model based on USEPA MOVES
+============
+
+Abstract
+============
+
   In this paper, we introduce an open-source model "MOVESTAR" to
   calculate the fuel consumption and pollutant emissions of motor
   vehicles. This model is developed based on U.S. Environmental
@@ -15,17 +19,14 @@ abstract: |
   including MATLAB and C++. A case study is introduced in this paper to
   illustrate the effectiveness of the model in the development of
   advanced vehicle technology.
-author:
-- |
+
+Author
+============
+
   Ziran Wang, Guoyuan Wu, George Scora\
   Center for Environmental Research and Technology\
   University of California, Riverside\
   `zwang050@ucr.edu, {gywu, gscora}@cert.ucr.edu`\
-bibliography:
-- reference.bib
-title: 'MOVESTAR: An Open-Source Vehicle Fuel and Emission Model based
-  on USEPA MOVES'
----
 
 Introduction
 ============
