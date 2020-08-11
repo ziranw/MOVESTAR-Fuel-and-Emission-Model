@@ -20,13 +20,13 @@ Abstract
   illustrate the effectiveness of the model in the development of
   advanced vehicle technology.
 
-Author
+Authors
 ============
 
   Ziran Wang, Guoyuan Wu, George Scora\
   Center for Environmental Research and Technology\
   University of California, Riverside\
-  zwang050@ucr.edu, {gywu, gscora}@cert.ucr.edu\
+  zwang050@ucr.edu, gywu@cert.ucr.edu, gscora@cert.ucr.edu\
 
 Introduction
 ============
@@ -82,7 +82,7 @@ This "MOVESTAR" model is developed in multiple platforms and programming
 languages, which enables both real-time calculation and post-processing
 evaluation.
 
-MOVESTAR Model {#sec:moves}
+MOVESTAR Model
 ==============
 
 ![Flowchart of the proposed MOVESTAR model as a simplified version of
