@@ -32,7 +32,7 @@ detailed integration steps should be referred to the Vissim manual.
 <img src="VISSIM.png" align="middle" width="1000"/>
 
 
-Case Study and Results Evaluation {#sec:case}
+Case Study and Results Evaluation
 =================================
 
 In this section, we perform a case study of MOVESTAR model based on a
