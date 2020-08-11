@@ -22,7 +22,7 @@ advance. There are five files in the MATLAB version of MOVESTAR
 model, where their features, inputs and outputs are listed in the 
 following table.
 
-<img src="Matlab.PNG" align="middle" width="700"/>
+<img src="images/Matlab.PNG" align="middle" width="700"/>
 
 In the current MATLAB version of MOVESTAR model, there are only two
 different vehicle types that the user needs to choose from. If the user
@@ -43,4 +43,4 @@ results, as shown in the following table. Additionally, MOVESTAR also provides t
 fuel and emission results based on the travel distance, which are
 included in the file with a "EF" suffix (i.e., "emission factor").
 
-<img src="Output.PNG" align="middle" width="700"/>
+<img src="images/Output.PNG" align="middle" width="700"/>
