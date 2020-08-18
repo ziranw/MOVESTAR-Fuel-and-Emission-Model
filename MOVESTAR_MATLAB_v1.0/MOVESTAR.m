@@ -3,14 +3,19 @@
 %                                                                         %
 %  Script for calculating fuel consumption and pollutant emissions.       %
 %																		  %
-%  Version of 08-10-2020             Copyright by Guoyuan Wu & Ziran Wang %
+%  Version of 08-18-2020             Copyright by Guoyuan Wu & Ziran Wang %
 %  University of California, Riverside, USA								  %
 %  gywu@cert.ucr.edu, ryanwang11@hotmail.com							  %
 %=========================================================================%
 
-%Run the example file by entering in MATLAB command window:
-% MOVESTAR(1, "test.csv")
+% Attention: "[speed]" and "[time]" need to be specified with their rows in
+%   the "textread" function. For example, if speed is the 6th row of a csv
+%   file, then the function should be specified as 
+%   "textread(fn, '%*s%*s%*s%*s%*s%n%*[^\n]',...)", where "%n" is on the 
+%   6th position after all other "%*s“。
 
+% Run the example file by entering in MATLAB command window:
+% MOVESTAR(1, "test.csv")
 function [] = MOVESTAR(vehType, fn)
 %MOVESTAR is to calculate the criteria pollutant emission based on MOVES
 %model and second-by-second vehicle velocity profile.
@@ -22,8 +27,18 @@ tt_sum = 0;
 td_sum = 0;
 
 % Read the data     % Unit: speed -- m/s
-[speed] = textread(fn, '%*s%*s%*s%*s%*s%*s%*s%*s%*s%*s%*s%*s%*s%*s%*s%*s%*s%*s%n%*[^\n]',...
+[speed] = textread(fn, '%*s%*s%*s%*s%*s%n%*[^\n]',...
 'delimiter', ',', 'headerlines', 1);
+
+% Following segment is used to transfer speed into m/s
+speed = speed / 3.6;
+
+% Following segment is used to process sub-second data
+[time] = textread(fn, '%n%*[^\n]','delimiter', ',', 'headerlines', 1);
+time_int = mod(time(:, 1), 1) < 0.001; % Pick out the row when time is integer
+[speed] = speed(time_int); % Change speed into second-by-second
+
+
 tt = length(speed);         % travel time -- sec
 td = sum(speed);            % travel distance -- m
 
