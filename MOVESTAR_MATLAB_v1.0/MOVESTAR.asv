@@ -76,7 +76,7 @@ tt_sum = tt_sum + tt;
 td_sum = td_sum + td;
 
 % Output emission rate and travel time
-output_fn1 = strcat(fn, '_ER', '.csv');
+output_fn1 = strcat(fn, '_ER', '.dat');
 fid1 = fopen(output_fn1, 'w');
 fprintf(fid1, 'CO(g),HC(g),NOx(g),PM2.5_Ele(g),PM2.5_Org(g),Energy(KJ),CO2(g),Fuel(g),TT(s)\n');
 for i = 1:8
@@ -86,7 +86,7 @@ fprintf(fid1, '%d\n', tt_sum);
 fclose(fid1);
 
 % Output emission factor and travel time
-output_fn2 = strcat(fn, '_EF', '.csv');
+output_fn2 = strcat(fn, '_EF', '.dat');
 fid2 = fopen(output_fn2, 'w');
 fprintf(fid2, 'CO(g/mi),HC(g/mi),NOx(g/mi),PM2.5_Ele(g/mi),PM2.5_Org(g/mi),Energy(KJ/mi),CO2(g/mi),Fuel(g/mi),TD(mi)\n');
 for i = 1:8
