@@ -3,7 +3,7 @@
 %                                                                         %
 %  Script for calculating fuel consumption and pollutant emissions.       %
 %																		  %
-%  Version of 08-18-2020             Copyright by Guoyuan Wu & Ziran Wang %
+%  Version of 09-01-2020             Copyright by Guoyuan Wu & Ziran Wang %
 %  University of California, Riverside, USA								  %
 %  gywu@cert.ucr.edu, ryanwang11@hotmail.com							  %
 %=========================================================================%
@@ -27,16 +27,20 @@ tt_sum = 0;
 td_sum = 0;
 
 % Read the data     % Unit: speed -- m/s
-[speed] = textread(fn, '%*s%*s%*s%*s%*s%n%*[^\n]',...
+[speed] = textread(fn, '%*s%*s%*s%*s%*s%*s%*s%*s%*s%*s%n%*[^\n]',...
 'delimiter', ',', 'headerlines', 1);
 
 % Following segment is used to transfer speed into m/s
 speed = speed / 3.6;
 
 % Following segment is used to process sub-second data
-[time] = textread(fn, '%n%*[^\n]','delimiter', ',', 'headerlines', 1);
-time_int = mod(time(:, 1), 1) < 0.001; % Pick out the row when time is integer
-[speed] = speed(time_int); % Change speed into second-by-second
+[time] = textread(fn, '%*s%n%*[^\n]','delimiter', ',', 'headerlines', 1);
+
+% Following segment can be uncommented if the original speed data has a
+%   frequency of 10Hz, 100Hz, 1000Hz, ...
+
+% time_int = mod(time(:, 1), 1) < 0.001; % Pick out the row when time is integer
+% [speed] = speed(time_int); % Change speed into second-by-second
 
 
 tt = length(speed);         % travel time -- sec
