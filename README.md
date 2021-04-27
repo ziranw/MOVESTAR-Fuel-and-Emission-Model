@@ -8,7 +8,7 @@ Note
 
 Abstract
 ============
-  In this paper, we introduce an open-source model "MOVESTAR" to
+  In this project, we introduce an open-source model "MOVESTAR" to
   calculate the fuel consumption and pollutant emissions of motor
   vehicles. This model is developed based on U.S. Environmental
   Protection Agency's (EPA) Motor Vehicle Emission Simulator (MOVES),
@@ -17,11 +17,11 @@ Abstract
   users to specify many parameters through its software graphical user
   interface (GUI), including vehicle types, time periods, geographical
   areas, pollutants, vehicle operating characteristics, and road types.
-  In this paper, MOVESTAR is developed as a lite version of MOVES, which
+  In this project, MOVESTAR is developed as a lite version of MOVES, which
   only takes the second-by-second vehicle speed data and vehicle type as
   inputs. To enable easy integration of this model, its source code is
   provided in different languages, including MATLAB and C++. A case
-  study is introduced in this paper to illustrate the effectiveness of
+  study is introduced in this project to illustrate the effectiveness of
   the model in the development of advanced vehicle technology.
 
 Authors
