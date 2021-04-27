@@ -1,6 +1,11 @@
 MOVESTAR: An Open-Source Vehicle Fuel and Emission Model based on USEPA MOVES
 ============
 
+Note
+============
+  If this model is used in any kinds of publications, please cite the following paper:
+  Z. Wang, G. Wu, and G. Scora, "MOVESTAR: An Open-Source Vehicle Fuel and Emission Model based on USEPA MOVES", arXiv:2008.04986, 2020.
+
 Abstract
 ============
   In this paper, we introduce an open-source model "MOVESTAR" to
