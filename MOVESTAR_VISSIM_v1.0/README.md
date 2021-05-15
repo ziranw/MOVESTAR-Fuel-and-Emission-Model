@@ -4,7 +4,7 @@ MOVESTAR: An Open-Source Vehicle Fuel and Emission Model based on USEPA MOVES
 Authors
 ============
 
-  Ziran Wang, Guoyuan Wu, George Scora\
+  Ziran Wang, Guoyuan Wu, and George Scora\
   Center for Environmental Research and Technology\
   University of California, Riverside\
   zwang050@ucr.edu, gywu@cert.ucr.edu, gscora@cert.ucr.edu
