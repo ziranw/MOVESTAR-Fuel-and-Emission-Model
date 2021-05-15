@@ -125,8 +125,11 @@ def movestar(veh_type,speed):
     # Read the data     % Unit: speed -- m/s
     
 
-    # Following segment is used to transfer speed into m/s
-    speed = speed / 3.6
+    # Following segment is used to transfer speed into m/s from km/h
+    #speed = speed / 3.6
+
+    # Following segment is used to transfer speed into m/s from mph
+    #speed = speed / 2.237
 
     # Following segment is used to process sub-second data
     
@@ -176,7 +179,7 @@ def movestar(veh_type,speed):
     outputcol='CO(g),HC(g),NOx(g),PM2.5_Ele(g),PM2.5_Org(g),Energy(KJ),CO2(g),Fuel(g),TT(s)'
     outputcol = outputcol.split(',')
     output_val = Ems_sum
-    output_val = np.append(output_val,td_sum)
+    output_val = np.append(output_val,tt_sum)
     
     dfER = pd.DataFrame(output_val).T
     dfER.columns=outputcol
