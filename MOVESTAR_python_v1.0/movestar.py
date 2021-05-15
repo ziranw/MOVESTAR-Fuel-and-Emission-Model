@@ -200,9 +200,11 @@ def movestar(veh_type,speed):
     return outputres
 
 if __name__ =="__main__":
+    #Load the speed file and read speed and time columns
     df = pd.read_csv('test.csv')
     speed = df['Speed'].values
     time = df['Time'].values
+    #Specify vehicle types, 1 for light-duty and 2 for heavy-duty
     veh_type = 1
     #print({'speed':speed,'vehicle_type':veh_type})
     movestar(veh_type,speed)

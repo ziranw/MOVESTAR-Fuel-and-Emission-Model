@@ -26,7 +26,7 @@ following table.
 
 In the current MATLAB version of MOVESTAR model, there are only two
 different vehicle types that the user needs to choose from. If the user
-specify "1" in the main function "MOVESTAR.m", then the tested vehicle
+specifies "1" in the main function "MOVESTAR.m", then the tested vehicle
 is assumed as a light-duty vehicle; Otherwise, if "2" is entered, then
 the tested vehicle is assumed as a light-duty truck.
 
