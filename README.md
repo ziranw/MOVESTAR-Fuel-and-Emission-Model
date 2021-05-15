@@ -20,14 +20,14 @@ Abstract
   In this project, MOVESTAR is developed as a lite version of MOVES, which
   only takes the second-by-second vehicle speed data and vehicle type as
   inputs. To enable easy integration of this model, its source code is
-  provided in different languages, including MATLAB and C++. A case
+  provided in different languages, including Python, MATLAB and C++. A case
   study is introduced in this project to illustrate the effectiveness of
   the model in the development of advanced vehicle technology.
 
 Authors
 ============
 
-  Ziran Wang, Guoyuan Wu, George Scora\
+  Ziran Wang, Guoyuan Wu, and George Scora\
   Center for Environmental Research and Technology\
   University of California, Riverside\
   zwang050@ucr.edu, gywu@cert.ucr.edu, gscora@cert.ucr.edu
