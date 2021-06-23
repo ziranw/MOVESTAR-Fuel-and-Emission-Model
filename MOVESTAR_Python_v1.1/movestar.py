@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """
 Created on Aug 28 2020
-Updated on May 14 2021
+Updated on Jun 22 2021
 
 @Authors: Kinjal Dand & Ziran Wang
 @Email: ryanwang11@hotmail.com
@@ -199,12 +199,108 @@ def movestar(veh_type,speed):
     print(outputres)
     return outputres
 
+# Generate a benchmark speed profile for eco-driving score calculation
+def calc_bench_mark_speed(speed):
+    V2 = speed[-1]
+    V1 = speed[0]
+
+    S = np.sum(speed)
+
+    acc = ((V2 ** 2) - (V1 ** 2)) / (2 * S)
+    # print(V1,V2,S,acc)
+    # benchmark_speed = [V1+acc*i for i in range(len(speed))]
+    benchmark_speed = []
+    benchmark_speed_S = 0
+    i = 0
+    while benchmark_speed_S < S:
+        unit_speed = V1 + acc * i
+        benchmark_speed.append(unit_speed)
+        i = i + 1
+        benchmark_speed_S = benchmark_speed_S + unit_speed
+    return benchmark_speed, S, benchmark_speed_S
+
+# Eco-driving score calculation
+def calc_eco_driving(veh_type, speed):
+    if veh_type not in [1, 2]:
+        return {'error': 'Please enter vehicle type as 1 or 2'}
+
+    outputs = {}
+    benchmark_speed, Org_Dist, benchmark_speed_S = calc_bench_mark_speed(speed)
+    # print(benchmark_speed)
+    outputs['benchmark_speed_trajectory'] = benchmark_speed
+    benchmark_score = movestar(veh_type, benchmark_speed)
+    E2 = benchmark_score['Emission Factor'][0][5]
+
+    trip_score = movestar(veh_type, speed)
+    E1 = trip_score['Emission Factor'][0][5]
+
+    # print(speed, benchmark_speed)
+    eco_driving_score = min(E2 / E1, 1) if E1 != 0 else 1
+    eco_driving_score = max(eco_driving_score, 0.6)
+    if np.isnan(eco_driving_score):
+        eco_driving_score = 0
+
+    e2_by_e1 = E2 / E1 if E1 != 0 else 0
+    outputs['Dist_Org'] = str(Org_Dist)
+    outputs['Dist_BenchMark'] = str(benchmark_speed_S)
+    outputs['E1_Org'] = E1
+    outputs['E2_BenchMark'] = E2
+    outputs['e2_by_e1'] = e2_by_e1
+    outputs['eco_driving_score'] = eco_driving_score
+    outputs['eco_driving_score_per'] = str(int(round(eco_driving_score, 2) * 100)) + "%"
+    print(E1,E2,eco_driving_score)
+    return outputs
+
+# Safe-driving score calculation
+def calc_safe_driving(speed):
+    outputs = {}
+    # print(benchmark_speed)
+    #var_actual = np.var(np.array(speed))
+    #safe_driving_score = min(var_benchmark / var_actual, 1) if var_actual != 0 else 1
+
+    acc = get_derivative(speed)
+    safe_driving_score = 1
+    acc_filter = len([x for x in acc if np.abs(x) > 3])
+    safe_driving_score = safe_driving_score - acc_filter * 0.04
+    safe_driving_score = max(safe_driving_score, 0.6)
+
+    outputs['acc'] = acc.tolist()
+    outputs['safe_driving_score'] = safe_driving_score
+    outputs['safe_driving_score_per'] = str(int(round(safe_driving_score, 2) * 100)) + "%"
+    print(acc_filter,safe_driving_score)
+    return outputs
+
+# Comfort-driving score calculation
+def calc_comfort_driving(speed):
+    outputs = {}
+    acc = get_derivative(speed)
+    jerk = get_derivative(acc)
+    comfort_score = 1
+    jerk_filter = len([x for x in jerk if np.abs(x) > 10])
+    comfort_score = comfort_score - jerk_filter * 0.04
+    comfort_score = max(comfort_score,0.6)
+
+    outputs['jerk'] = jerk.tolist()
+    outputs['comfort_score'] = comfort_score
+    outputs['comfort_score_per'] = str(int(round(comfort_score, 2) * 100)) + "%"
+    print(jerk_filter,comfort_score)
+    return outputs
+
+# Main function
 if __name__ =="__main__":
-    #Load the speed file and read speed and time columns
+    # Load the speed file and read speed and time columns
     df = pd.read_csv('test.csv')
     speed = df['Speed'].values
     time = df['Time'].values
-    #Specify vehicle types, 1 for light-duty and 2 for heavy-duty
+    # Specify vehicle types, 1 for light-duty and 2 for heavy-duty
     veh_type = 1
     #print({'speed':speed,'vehicle_type':veh_type})
+
+    # The main function of MOVESTAR
     movestar(veh_type,speed)
+
+    # Additional scoring functions (optional)
+    #calc_eco_driving(veh_type, speed)
+    #calc_safe_driving(speed)
+    #calc_comfort_driving(speed)
+
