@@ -298,7 +298,7 @@ def calc_comfort_driving(speed):
 # Main function
 if __name__ =="__main__":
     # Load the speed file and read speed and time columns
-    df = pd.read_csv('test2.csv')
+    df = pd.read_csv('test.csv')
     speed = df['Speed'].values
     time = df['Time'].values
     # Specify vehicle types, 1 for light-duty and 2 for heavy-duty
@@ -309,7 +309,7 @@ if __name__ =="__main__":
     movestar(veh_type,speed)
 
     # Additional scoring functions (optional)
-    calc_eco_driving(veh_type, speed)
-    calc_safe_driving(speed)
-    calc_comfort_driving(speed)
+    #calc_eco_driving(veh_type, speed)
+    #calc_safe_driving(speed)
+    #calc_comfort_driving(speed)
 
