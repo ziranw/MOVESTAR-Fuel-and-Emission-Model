@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """
 Created on Aug 28 2020
-Updated on Jun 22 2021
+Updated on Jun 28 2021
 
 @Authors: Kinjal Dand & Ziran Wang
 @Email: ryanwang11@hotmail.com
@@ -225,30 +225,39 @@ def calc_eco_driving(veh_type, speed):
         return {'error': 'Please enter vehicle type as 1 or 2'}
 
     outputs = {}
-    benchmark_speed, Org_Dist, benchmark_speed_S = calc_bench_mark_speed(speed)
-    # print(benchmark_speed)
-    outputs['benchmark_speed_trajectory'] = benchmark_speed
-    benchmark_score = movestar(veh_type, benchmark_speed)
-    E2 = benchmark_score['Emission Factor'][0][5]
 
-    trip_score = movestar(veh_type, speed)
-    E1 = trip_score['Emission Factor'][0][5]
+    V1 = speed[0]
+    V2 = speed[-1]
+    # For corner cases when start and end speed are zeros, directly assign full score
+    if V1 == V2 == 0:
+        eco_driving_score = 1
+    # Otherwise calculate the eco score based on the ratio with benchmark speed
+    else:
+        benchmark_speed, Org_Dist, benchmark_speed_S = calc_bench_mark_speed(speed)
+        # print(benchmark_speed)
+        outputs['benchmark_speed_trajectory'] = benchmark_speed
+        benchmark_score = movestar(veh_type, benchmark_speed)
+        E2 = benchmark_score['Emission Factor'][0][5]
 
-    # print(speed, benchmark_speed)
-    eco_driving_score = min(E2 / E1, 1) if E1 != 0 else 1
-    eco_driving_score = max(eco_driving_score, 0.6)
-    if np.isnan(eco_driving_score):
-        eco_driving_score = 0
+        trip_score = movestar(veh_type, speed)
+        E1 = trip_score['Emission Factor'][0][5]
 
-    e2_by_e1 = E2 / E1 if E1 != 0 else 0
-    outputs['Dist_Org'] = str(Org_Dist)
-    outputs['Dist_BenchMark'] = str(benchmark_speed_S)
-    outputs['E1_Org'] = E1
-    outputs['E2_BenchMark'] = E2
-    outputs['e2_by_e1'] = e2_by_e1
+        # print(speed, benchmark_speed)
+        eco_driving_score = min(E2 / E1, 1) if E1 != 0 else 1
+        eco_driving_score = max(eco_driving_score, 0.6)
+        if np.isnan(eco_driving_score):
+            eco_driving_score = 0
+
+        e2_by_e1 = E2 / E1 if E1 != 0 else 0
+        outputs['Dist_Org'] = str(Org_Dist)
+        outputs['Dist_BenchMark'] = str(benchmark_speed_S)
+        outputs['E1_Org'] = E1
+        outputs['E2_BenchMark'] = E2
+        outputs['e2_by_e1'] = e2_by_e1
+
     outputs['eco_driving_score'] = eco_driving_score
     outputs['eco_driving_score_per'] = str(int(round(eco_driving_score, 2) * 100)) + "%"
-    print(E1,E2,eco_driving_score)
+    #print("Eco score is:", eco_driving_score)
     return outputs
 
 # Safe-driving score calculation
@@ -267,7 +276,7 @@ def calc_safe_driving(speed):
     outputs['acc'] = acc.tolist()
     outputs['safe_driving_score'] = safe_driving_score
     outputs['safe_driving_score_per'] = str(int(round(safe_driving_score, 2) * 100)) + "%"
-    print(acc_filter,safe_driving_score)
+    #print(acc_filter,safe_driving_score)
     return outputs
 
 # Comfort-driving score calculation
@@ -283,13 +292,13 @@ def calc_comfort_driving(speed):
     outputs['jerk'] = jerk.tolist()
     outputs['comfort_score'] = comfort_score
     outputs['comfort_score_per'] = str(int(round(comfort_score, 2) * 100)) + "%"
-    print(jerk_filter,comfort_score)
+    #print(jerk_filter,comfort_score)
     return outputs
 
 # Main function
 if __name__ =="__main__":
     # Load the speed file and read speed and time columns
-    df = pd.read_csv('test.csv')
+    df = pd.read_csv('test2.csv')
     speed = df['Speed'].values
     time = df['Time'].values
     # Specify vehicle types, 1 for light-duty and 2 for heavy-duty
@@ -300,7 +309,7 @@ if __name__ =="__main__":
     movestar(veh_type,speed)
 
     # Additional scoring functions (optional)
-    #calc_eco_driving(veh_type, speed)
-    #calc_safe_driving(speed)
-    #calc_comfort_driving(speed)
+    calc_eco_driving(veh_type, speed)
+    calc_safe_driving(speed)
+    calc_comfort_driving(speed)
 
