@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """
 Created on Aug 28 2020
-Updated on Jun 30 2021
+Updated on Jul 6 2021
 @Authors: Kinjal Dand & Ziran Wang
 @Email: ryanwang11@hotmail.com
 @Website: http://ziranw.github.io
@@ -200,8 +200,8 @@ def movestar(veh_type, speed):
     outputcol = 'CO(g/mi),HC(g/mi),NOx(g/mi),PM2.5_Ele(g/mi),PM2.5_Org(g/mi),Energy(KJ/mi),CO2(g/mi),Fuel(g/mi),TD(mi)'
     outputcol = outputcol.split(',')
     # Corner case when all speed values are zeros
-    if all(v == 0 for v in speed):
-        return
+    if all(v == 0 for v in speed) or any(v < 0 for v in speed):
+        return {}
     else:
         output_val = Ems_sum * c1 / td_sum
     output_val = np.append(output_val, (td_sum / c1))
@@ -284,7 +284,7 @@ def calc_eco_driving(veh_type, speed):
 
         # print(speed, benchmark_speed)
         eco_driving_score = 1 if E1 == 0 else min(E2 / E1, 1)
-        eco_driving_score = max(eco_driving_score, 0.6)
+        eco_driving_score = max(eco_driving_score, 0.5)
 
         if np.isnan(eco_driving_score):
             eco_driving_score = 0
@@ -304,7 +304,7 @@ def calc_eco_driving(veh_type, speed):
     outputs['emission_pm2.5'] = trip_score['Emission Rate'][0][4]
     outputs['emission_energy'] = trip_score['Emission Rate'][0][5]
     outputs['emission_co2'] = trip_score['Emission Rate'][0][6]
-    print (outputs)
+    print (eco_driving_score)
     return outputs
 
 
@@ -318,9 +318,9 @@ def calc_safe_driving(speed):
     # safe_driving_score  = 1 if var_actual == 0 else min(var_benchmark / var_actual, 1)
     acc = get_derivative(speed)
     safe_driving_score = 1
-    acc_filter = len([x for x in acc if np.abs(x) > 3])
-    safe_driving_score = safe_driving_score - acc_filter * 0.04
-    safe_driving_score = max(safe_driving_score, 0.6)
+    acc_filter = len([x for x in acc if np.abs(x) > 2])
+    safe_driving_score = safe_driving_score - acc_filter * 0.05
+    safe_driving_score = max(safe_driving_score, 0.5)
 
     # outputs['benchmark_speed_trajectory'] = benchmark_speed
     # outputs['var_actual'] = var_actual
@@ -328,7 +328,7 @@ def calc_safe_driving(speed):
     outputs['acc'] = acc.tolist()
     outputs['safe_driving_score'] = safe_driving_score
     outputs['safe_driving_score_per'] = str(int(round(safe_driving_score, 2) * 100)) + "%"
-    # print(acc_filter, '  ', safe_driving_score)
+    print(acc_filter, '  ', safe_driving_score)
     return outputs
 
 
@@ -339,17 +339,17 @@ def calc_comfort_driving(speed):
     jerk = get_derivative(acc)
     comfort_score = 1
     # acc_filter = len([x for x in acc if np.abs(x) > 3])
-    jerk_filter = len([x for x in jerk if np.abs(x) > 10])
+    jerk_filter = len([x for x in jerk if np.abs(x) > 5])
     # comfort_score = comfort_score - (acc_filter + jerk_filter)*0.01
-    comfort_score = comfort_score - jerk_filter * 0.04
-    comfort_score = max(comfort_score, 0.6)
+    comfort_score = comfort_score - jerk_filter * 0.05
+    comfort_score = max(comfort_score, 0.5)
 
     # outputs['acc'] = acc.tolist()
     outputs['jerk'] = jerk.tolist()
     outputs['comfort_score'] = comfort_score
     outputs['comfort_score_per'] = str(int(round(comfort_score, 2) * 100)) + "%"
 
-    # print(jerk_filter, '  ', comfort_score)
+    print(jerk_filter, '  ', comfort_score)
     return outputs
 
 
