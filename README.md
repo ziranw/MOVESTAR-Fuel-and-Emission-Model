@@ -5,6 +5,13 @@ Note
 ============
   If this model is used in any kinds of publications, please cite the following paper:
   Z. Wang, G. Wu, and G. Scora, "MOVESTAR: An Open-Source Vehicle Fuel and Emission Model based on USEPA MOVES", arXiv:2008.04986, 2020.
+  
+  @article{wang2020movestar,
+  title={MOVESTAR: An open-source vehicle fuel and emission model based on usepa moves},
+  author={Wang, Ziran and Wu, Guoyuan and Scora, George},
+  journal={arXiv preprint arXiv:2008.04986},
+  year={2020}
+}
 
 Abstract
 ============
